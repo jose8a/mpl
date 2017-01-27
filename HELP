@@ -1,0 +1,15 @@
+Usage:
+      mpl OPTION [SONG]
+      mpl OPTION [PLAYLIST]
+      mpl OPTION [PLAYLIST] -u [URL]
+
+      OPTIONS:
+      -h                    :display help menu
+      -l PLAYLIST           :display all songs in PLAYLIST
+      -L                    :display all available PLAYLISTS
+      -e PLAYLIST           :edit the PLAYLIST file
+      -c PLAYLIST           :create new empty playlist PLAYLIST
+      -p PLAYLIST           :play PLAYLIST
+
+      -c PLIST -u URL       :create new playlist PLAYLIST from url URL
+                              ... url should be a youtube or soundcloud playlist url
