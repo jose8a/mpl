@@ -6,6 +6,12 @@
 OPTION=$1
 PLAYLIST=$2
 
+MPVEXEC="/Users/jose8a/Downloads/mps/mpv.app/Contents/MacOS/mpv"
+MPVOPTS1="--no-video --shuffle --volume=50"
+
+MPL_PLAYLISTS="/Users/jose8a/.mpl/playlists"
+
+
 # ===========================================================================
 # FUNCTIONS
 # ===========================================================================
@@ -19,8 +25,13 @@ show_songlist() {
 }
 
 show_playlists() {
-  # TODO
-  echo TODO
+  echo "All playlists:"
+  echo "-----------------------------------"
+
+  ls $MPL_PLAYLISTS | grep ".list" | cat | cut -d . -f 1
+
+  echo "-----------------------------------"
+  echo
 }
 
 edit_playlist () {
