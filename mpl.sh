@@ -6,11 +6,10 @@
 OPTION=$1
 PLAYLIST=$2
 
-MPVEXEC="/Users/jose8a/Downloads/mps/mpv.app/Contents/MacOS/mpv"
-MPVOPTS1="--no-video --shuffle --volume=50"
+MPVEXEC="/Applications/mpv.app/Contents/MacOS/mpv"
+MPVOPTS1="--no-video --shuffle --volume=50 --geometry=25%+10+10"
 
-MPL_PLAYLISTS="/Users/jose8a/.mpl/playlists"
-
+PL_FOLDER="/Users/jose8a/.mpl/playlists"
 
 # ===========================================================================
 # FUNCTIONS
@@ -45,8 +44,29 @@ create_playlist () {
 }
 
 play_songlist () {
-  # TODO
-  echo TODO
+  PL_FILE="$PL_FOLDER/$PLAYLIST.list"
+  PL_CMD="--playlist=$PL_FILE"
+
+  # first check if the songlist exists
+  if [ -e $PL_FILE ]
+  then
+    echo "Found songlist: $PL_FILE"
+
+    # if the songlist path is valid, try playing the songlist
+    if [ -e $MPVEXEC ]
+    then
+      echo "Playing $PLAYLIST"
+      $MPVEXEC $PL_CMD $MPVOPTS1
+    else
+      echo
+      echo -e "\x1b[0;31m  ERROR: MPV executable not found. \x1b[m"
+    fi
+  else
+    echo
+    echo -e "\x1b[0;31m  ERROR: Could not play songlist. \x1b[m"
+    echo -e "\x1b[0;31m  NOT FOUND: $PL_FILE \x1b[m"
+    echo
+  fi
 }
 
 mpl_play_list () {
