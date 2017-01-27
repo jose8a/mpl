@@ -10,6 +10,7 @@ MPVEXEC="/Applications/mpv.app/Contents/MacOS/mpv"
 MPVOPTS1="--no-video --shuffle --volume=50 --geometry=25%+10+10"
 
 PL_FOLDER="/Users/jose8a/.mpl/playlists"
+PL_FILE="$PL_FOLDER/$PLAYLIST.list"
 
 # ===========================================================================
 # FUNCTIONS
@@ -19,15 +20,30 @@ show_help() {
 }
 
 show_songlist() {
-  # TODO
-  echo TODO
+  if [ -e $PL_FILE ]
+  then
+    NUMSONGS=$(wc -l $PL_FILE | cut -d / -f 1)
+    echo
+    echo "$NUMSONGS tunes in $PLAYLIST songlist:"
+    echo "-----------------------------------"
+    echo -e "\x1b[0;35m"
+    cat $PL_FILE | xargs -n 1 echo "   "
+    echo -e "\x1b[m"
+    echo "-----------------------------------"
+    echo
+  else
+    echo
+    echo -e "\x1b[0;31m  ERROR: Could not find songlist. \x1b[m"
+    echo -e "\x1b[0;31m  NOT FOUND: $PL_FILE \x1b[m"
+    echo
+  fi
 }
 
 show_playlists() {
   echo "All playlists:"
   echo "-----------------------------------"
 
-  ls $MPL_PLAYLISTS | grep ".list" | cat | cut -d . -f 1
+  ls $PL_FOLDER | grep ".list" | cat | cut -d . -f 1
 
   echo "-----------------------------------"
   echo
@@ -44,7 +60,6 @@ create_playlist () {
 }
 
 play_songlist () {
-  PL_FILE="$PL_FOLDER/$PLAYLIST.list"
   PL_CMD="--playlist=$PL_FILE"
 
   # first check if the songlist exists
@@ -67,11 +82,6 @@ play_songlist () {
     echo -e "\x1b[0;31m  NOT FOUND: $PL_FILE \x1b[m"
     echo
   fi
-}
-
-mpl_play_list () {
-  # TODO
-  echo TODO
 }
 
 
